@@ -2,8 +2,9 @@ export const personalInfo = {
   name: 'Tiago Hürst',
   role: 'Desarrollador Web Frontend',
   location: 'Córdoba, Argentina',
-  email: 'tiago.hurst@example.com',
-  github: 'https://github.com',
+  email: 'tiagohurst123@gmail.com',
+  whatsapp: 'https://wa.me/5493512345678',
+  github: 'https://github.com/tiagooo0',
   linkedin: 'https://linkedin.com',
   hero: {
     title: 'Tiago Hürst',
@@ -64,7 +65,8 @@ No tengo años de experiencia, pero tengo algo que muchos no tienen: determinaci
   contact: {
     title: '¿Trabajamos juntos?',
     description: 'Si buscas a alguien con determinación, capacidad de aprendizaje y muchas ganas de growkar, hablemos.',
-    email: 'tiago.hurst@example.com',
+    email: 'tiagohurst123@gmail.com',
+    whatsapp: 'https://wa.me/5493512345678',
   },
 }
 

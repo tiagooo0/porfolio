@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, Send, Sparkles } from 'lucide-react'
+import { Mail, Github, Linkedin, Send, Sparkles, MessageCircle } from 'lucide-react'
 import { personalInfo } from '@/data/content'
 
 export default function Contact() {
@@ -44,17 +44,29 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            className="flex flex-wrap gap-4 justify-center mb-12"
           >
             <motion.a
-              href={`mailto:${personalInfo.contact.email}`}
+              href={`mailto:${personalInfo.email}`}
               whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold transition-all bg-foreground text-background shadow-lg shadow-foreground/20 hover:shadow-xl hover:shadow-foreground/30"
             >
               <Mail size={20} />
-              Enviar email
+              Email
               <Send size={18} />
+            </motion.a>
+
+            <motion.a
+              href={personalInfo.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold transition-all bg-green-500 text-white shadow-lg shadow-green-500/20 hover:shadow-xl hover:shadow-green-500/30"
+            >
+              <MessageCircle size={20} />
+              WhatsApp
             </motion.a>
           </motion.div>
 
@@ -66,7 +78,7 @@ export default function Contact() {
             className="flex items-center justify-center gap-4"
           >
             <span className="text-sm text-muted">También puedes encontrarme en:</span>
-            <div className="flex gap-3">
+<div className="flex gap-3">
               <motion.a
                 href={personalInfo.github}
                 target="_blank"
@@ -90,13 +102,24 @@ export default function Contact() {
                 <Linkedin size={22} />
               </motion.a>
               <motion.a
-                href={`mailto:${personalInfo.contact.email}`}
+                href={`mailto:${personalInfo.email}`}
                 whileHover={{ scale: 1.1, y: -3 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-xl bg-card border border-border hover:border-accent/50 hover:bg-card-hover transition-all"
                 aria-label="Email"
               >
                 <Mail size={22} />
+              </motion.a>
+              <motion.a
+                href={personalInfo.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 rounded-xl bg-card border border-border hover:border-green-500/50 hover:bg-card-hover transition-all"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={22} />
               </motion.a>
             </div>
           </motion.div>
