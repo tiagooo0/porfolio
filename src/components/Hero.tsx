@@ -114,8 +114,8 @@ export default function Hero() {
             <div className="relative w-72 h-72 md:w-96 md:h-96">
               <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-accent via-purple-500 to-accent opacity-20 blur-xl" />
               <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-accent/10 to-transparent rotate-3" />
-              <div className="absolute inset-2 rounded-[2rem] bg-card border border-border flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
+              <div className="absolute inset-2 rounded-[2rem] bg-card border border-border overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent z-10" />
                 <motion.div
                   animate={{ 
                     backgroundPosition: ['0% 0%', '100% 100%'],
@@ -127,9 +127,13 @@ export default function Hero() {
                     backgroundSize: '40px 40px',
                   }}
                 />
-                <span className="text-9xl md:text-[10rem] font-bold text-foreground/10 relative z-10" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  {personalInfo.name.charAt(0)}
-                </span>
+                <motion.img
+                  src={personalInfo.hero.photo}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.5 }}
+                />
               </div>
               <motion.div
                 animate={{ y: [-5, 5, -5] }}
