@@ -21,7 +21,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 100)
+      setScrolled(window.scrollY > 50)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -55,29 +55,28 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="fixed top-0 left-0 right-0 z-50 pt-4 px-4"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 px-4"
       >
         <motion.div
           animate={{ 
-            width: scrolled ? 'auto' : 'auto',
-            padding: scrolled ? '0.5rem 1rem' : '0.5rem 1rem',
+            width: scrolled ? 340 : 380,
           }}
-          className="mx-auto max-w-fit"
+          transition={{ duration: 0.3 }}
+          className="relative"
         >
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="flex items-center gap-1 p-1.5 rounded-2xl bg-card/80 backdrop-blur-xl border border-border/50 shadow-2xl shadow-black/5"
-          >
+          <div className="absolute inset-0 rounded-full bg-card/60 backdrop-blur-2xl border border-border/30 shadow-2xl shadow-black/10" />
+          
+          <div className="relative flex items-center justify-between h-12 px-1">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2.5 rounded-xl hover:bg-background transition-colors md:hidden"
+              className="p-2 rounded-full hover:bg-foreground/5 transition-colors md:hidden"
               aria-label="Menú"
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              {isOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
 
-            <div className="hidden md:flex items-center gap-1">
-              {navLinks.map((link, index) => {
+            <div className="hidden md:flex items-center gap-0.5">
+              {navLinks.map((link) => {
                 const Icon = iconMap[link.href]
                 return (
                   <motion.a
@@ -85,29 +84,27 @@ export default function Navbar() {
                     href={link.href}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-muted hover:text-foreground hover:bg-background transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-muted hover:text-foreground hover:bg-foreground/5 transition-all"
                   >
-                    {Icon && <Icon size={16} />}
+                    {Icon && <Icon size={14} />}
                     <span>{link.label}</span>
                   </motion.a>
                 )
               })}
             </div>
 
-            <div className="w-px h-6 bg-border hidden md:block" />
-
             <motion.button
               onClick={cycleTheme}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="p-2.5 rounded-xl hover:bg-background transition-colors"
+              className="p-2 rounded-full hover:bg-foreground/5 transition-colors"
               aria-label="Cambiar tema"
             >
-              {theme === 'light' && <Sun size={18} />}
-              {theme === 'dark' && <Moon size={18} />}
-              {theme === 'system' && <Monitor size={18} />}
+              {theme === 'light' && <Sun size={16} />}
+              {theme === 'dark' && <Moon size={16} />}
+              {theme === 'system' && <Monitor size={16} />}
             </motion.button>
-          </motion.div>
+          </div>
         </motion.div>
       </motion.nav>
 
@@ -118,9 +115,9 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-6">
+            <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, i) => {
                 const Icon = iconMap[link.href]
                 return (
@@ -131,9 +128,9 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-3 text-2xl font-semibold"
+                    className="flex items-center gap-3 text-3xl font-semibold"
                   >
-                    {Icon && <Icon size={24} />}
+                    {Icon && <Icon size={28} />}
                     {link.label}
                   </motion.a>
                 )
