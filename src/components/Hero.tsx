@@ -112,50 +112,22 @@ export default function Hero() {
             className="flex-shrink-0 relative"
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-0 rounded-full border-2 border-dashed border-accent/30"
-              />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-2 rounded-full border border-purple-500/20"
-              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent via-purple-500/50 to-transparent blur-2xl opacity-60" />
               
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/20 via-purple-500/10 to-transparent blur-xl" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-accent/10 to-transparent" />
               
-              <div className="absolute inset-0 rounded-full overflow-hidden">
-                <motion.div
-                  animate={{ 
-                    backgroundPosition: ['0% 0%', '100% 100%'],
-                  }}
-                  transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse' }}
-                  className="absolute inset-0 opacity-40"
-                  style={{
-                    backgroundImage: 'radial-gradient(circle at 20% 30%, var(--accent) 1px, transparent 1px), radial-gradient(circle at 80% 70%, var(--accent) 1px, transparent 1px)',
-                    backgroundSize: '40px 40px',
-                  }}
+              <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-white/10">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30 z-10" />
+                <img
+                  src={personalInfo.hero.photo}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover"
                 />
-                
-                <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-accent to-purple-500">
-                  <div className="w-full h-full rounded-full bg-card overflow-hidden">
-                    <img
-                      src={personalInfo.hero.photo}
-                      alt={personalInfo.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
               </div>
               
-              <motion.div
-                animate={{ y: [-3, 3, -3] }}
-                transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-                className="absolute -bottom-4 -right-8 w-14 h-14 rounded-2xl bg-card border border-border flex items-center justify-center shadow-xl"
-              >
-                <Code2 size={20} className="text-accent" />
-              </motion.div>
+              <div className="absolute -bottom-3 -right-3 w-12 h-12 rounded-2xl bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center shadow-2xl shadow-accent/40">
+                <Code2 size={18} className="text-white" />
+              </div>
             </div>
           </motion.div>
         </div>
