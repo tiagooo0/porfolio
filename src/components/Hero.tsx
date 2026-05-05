@@ -123,27 +123,31 @@ export default function Hero() {
                 className="absolute inset-2 rounded-full border border-purple-500/20"
               />
               
-              <div className="absolute inset-4 rounded-full bg-gradient-to-br from-accent/20 to-purple-500/20 blur-xl" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/20 via-purple-500/10 to-transparent blur-xl" />
               
-              <div className="absolute inset-0 rounded-full p-1 bg-gradient-to-br from-accent to-purple-500">
-                <div className="w-full h-full rounded-full bg-card overflow-hidden">
-                  <motion.img
-                    src={personalInfo.hero.photo}
-                    alt={personalInfo.name}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                  />
+              <div className="absolute inset-0 rounded-full overflow-hidden">
+                <motion.div
+                  animate={{ 
+                    backgroundPosition: ['0% 0%', '100% 100%'],
+                  }}
+                  transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse' }}
+                  className="absolute inset-0 opacity-40"
+                  style={{
+                    backgroundImage: 'radial-gradient(circle at 20% 30%, var(--accent) 1px, transparent 1px), radial-gradient(circle at 80% 70%, var(--accent) 1px, transparent 1px)',
+                    backgroundSize: '40px 40px',
+                  }}
+                />
+                
+                <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-accent to-purple-500">
+                  <div className="w-full h-full rounded-full bg-card overflow-hidden">
+                    <img
+                      src={personalInfo.hero.photo}
+                      alt={personalInfo.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
-              
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-accent shadow-lg shadow-accent/50 flex items-center justify-center"
-              >
-                <span className="text-white text-lg">⚡</span>
-              </motion.div>
               
               <motion.div
                 animate={{ y: [-3, 3, -3] }}
