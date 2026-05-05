@@ -106,41 +106,51 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex-shrink-0"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex-shrink-0 relative"
           >
-            <div className="relative w-72 h-72 md:w-96 md:h-96">
-              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-accent via-purple-500 to-accent opacity-20 blur-xl" />
-              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-accent/10 to-transparent rotate-3" />
-              <div className="absolute inset-2 rounded-[2rem] bg-card border border-border overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent z-10" />
-                <motion.div
-                  animate={{ 
-                    backgroundPosition: ['0% 0%', '100% 100%'],
-                  }}
-                  transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse' }}
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    backgroundImage: 'radial-gradient(circle at 20% 30%, var(--accent) 1px, transparent 1px), radial-gradient(circle at 80% 70%, var(--accent) 1px, transparent 1px)',
-                    backgroundSize: '40px 40px',
-                  }}
-                />
-                <motion.img
-                  src={personalInfo.hero.photo}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
-                />
-              </div>
+            <div className="relative w-64 h-64 md:w-80 md:h-80">
               <motion.div
-                animate={{ y: [-5, 5, -5] }}
-                transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-                className="absolute -bottom-4 -right-4 w-16 h-16 rounded-2xl bg-accent flex items-center justify-center shadow-xl shadow-accent/30"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0 rounded-full border-2 border-dashed border-accent/30"
+              />
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-2 rounded-full border border-purple-500/20"
+              />
+              
+              <div className="absolute inset-4 rounded-full bg-gradient-to-br from-accent/20 to-purple-500/20 blur-xl" />
+              
+              <div className="absolute inset-0 rounded-full p-1 bg-gradient-to-br from-accent to-purple-500">
+                <div className="w-full h-full rounded-full bg-card overflow-hidden">
+                  <motion.img
+                    src={personalInfo.hero.photo}
+                    alt={personalInfo.name}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
+              </div>
+              
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-accent shadow-lg shadow-accent/50 flex items-center justify-center"
               >
-                <Code2 size={24} className="text-white" />
+                <span className="text-white text-lg">⚡</span>
+              </motion.div>
+              
+              <motion.div
+                animate={{ y: [-3, 3, -3] }}
+                transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+                className="absolute -bottom-4 -right-8 w-14 h-14 rounded-2xl bg-card border border-border flex items-center justify-center shadow-xl"
+              >
+                <Code2 size={20} className="text-accent" />
               </motion.div>
             </div>
           </motion.div>
