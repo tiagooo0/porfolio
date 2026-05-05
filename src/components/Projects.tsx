@@ -39,8 +39,10 @@ export default function Projects() {
               whileHover={{ y: -8 }}
               className="group relative bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-accent/5"
             >
+              
+              {/* IMAGE + OVERLAY */}
               <div className="relative h-48 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent z-10" />
+                
                 <motion.img
                   src={project.image}
                   alt={project.title}
@@ -48,9 +50,30 @@ export default function Projects() {
                   whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.5 }}
                 />
-                <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-300 z-20" />
+
+                {/* Gradient base */}
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent z-10" />
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-[2px] transition-all duration-300 z-20 flex items-center justify-center">
+                  
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                  >
+                    <div className="px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md text-white text-sm font-medium flex items-center gap-2 border border-white/30 hover:bg-white/30 hover:scale-105 transition">
+                      <ExternalLink size={16} />
+                      Ver proyecto
+                    </div>
+                  </a>
+
+                </div>
+
               </div>
 
+              {/* CONTENT */}
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
                   {project.title}
@@ -96,6 +119,7 @@ export default function Projects() {
                   </a>
                 </div>
               </div>
+
             </motion.article>
           ))}
         </div>

@@ -120,8 +120,6 @@ export default function About() {
                 transition={{ delay: 0.4 }}
                 className="flex items-center gap-3 text-muted"
               >
-                <TrendingUp size={18} className="text-accent" />
-                <span className="text-sm">Mi trayectoria: crecimiento constante</span>
               </motion.div>
             </div>
           </div>
