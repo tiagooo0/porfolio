@@ -11,7 +11,7 @@ hero: {
     role: 'Desarrollador Web ',
     subtitle: 'Construyo interfaces modernas, rápidas y enfocadas en resultados.',
     badge: 'Disponible para trabajar',
-    photo: '/fotoYo.jpeg',
+    photo: '/fotoYo.jpg',
   },
   about: {
     title: 'Sobre mí',
