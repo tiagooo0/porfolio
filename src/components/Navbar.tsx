@@ -2,10 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon, Monitor } from 'lucide-react'
-import { personalInfo, navLinks } from '@/data/content'
+import { Menu, X, Sun, Moon, Monitor, Home, FolderKanban, User, Mail } from 'lucide-react'
+import { navLinks } from '@/data/content'
 
 type Theme = 'light' | 'dark' | 'system'
+
+const iconMap: Record<string, typeof Home> = {
+  '#inicio': Home,
+  '#proyectos': FolderKanban,
+  '#sobre-mi': User,
+  '#contacto': Mail,
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,7 +21,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
+      setScrolled(window.scrollY > 100)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -45,80 +52,92 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-border'
-            : 'bg-transparent'
-        }`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="fixed top-0 left-0 right-0 z-50 pt-4 px-4"
       >
-        <div className="container-custom flex items-center justify-between h-16 md:h-20">
-          <a
-            href="#inicio"
-            className="text-xl md:text-2xl font-bold tracking-tight"
-            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+        <motion.div
+          animate={{ 
+            width: scrolled ? 'auto' : 'auto',
+            padding: scrolled ? '0.5rem 1rem' : '0.5rem 1rem',
+          }}
+          className="mx-auto max-w-fit"
+        >
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="flex items-center gap-1 p-1.5 rounded-2xl bg-card/80 backdrop-blur-xl border border-border/50 shadow-2xl shadow-black/5"
           >
-            {personalInfo.name}
-          </a>
-
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-3">
             <button
-              onClick={cycleTheme}
-              className="p-2 rounded-lg hover:bg-card-hover transition-colors"
-              aria-label="Cambiar tema"
-            >
-              {theme === 'light' && <Sun size={20} />}
-              {theme === 'dark' && <Moon size={20} />}
-              {theme === 'system' && <Monitor size={20} />}
-            </button>
-
-            <button
-              className="md:hidden p-2 rounded-lg hover:bg-card-hover transition-colors"
               onClick={() => setIsOpen(!isOpen)}
+              className="p-2.5 rounded-xl hover:bg-background transition-colors md:hidden"
               aria-label="Menú"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
-          </div>
-        </div>
+
+            <div className="hidden md:flex items-center gap-1">
+              {navLinks.map((link, index) => {
+                const Icon = iconMap[link.href]
+                return (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-muted hover:text-foreground hover:bg-background transition-all"
+                  >
+                    {Icon && <Icon size={16} />}
+                    <span>{link.label}</span>
+                  </motion.a>
+                )
+              })}
+            </div>
+
+            <div className="w-px h-6 bg-border hidden md:block" />
+
+            <motion.button
+              onClick={cycleTheme}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="p-2.5 rounded-xl hover:bg-background transition-colors"
+              aria-label="Cambiar tema"
+            >
+              {theme === 'light' && <Sun size={18} />}
+              {theme === 'dark' && <Moon size={18} />}
+              {theme === 'system' && <Monitor size={18} />}
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </motion.nav>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-background md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={() => setIsOpen(false)}
-                  className="text-2xl font-semibold"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+            <div className="flex flex-col items-center justify-center h-full gap-6">
+              {navLinks.map((link, i) => {
+                const Icon = iconMap[link.href]
+                return (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 text-2xl font-semibold"
+                  >
+                    {Icon && <Icon size={24} />}
+                    {link.label}
+                  </motion.a>
+                )
+              })}
             </div>
           </motion.div>
         )}
